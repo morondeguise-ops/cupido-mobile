@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'core/config/app_config.dart';
 import 'core/services/notification_service.dart';
@@ -14,17 +15,14 @@ import 'core/providers/auth_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase (skip on web if not configured)
+  // Initialize Firebase with platform-specific options
   try {
-    if (kIsWeb) {
-      // For web, Firebase needs explicit configuration
-      // Skip initialization if not configured
-      debugPrint('Firebase initialization skipped on web - please configure firebase options');
-    } else {
-      await Firebase.initializeApp();
-    }
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    debugPrint('✅ Firebase initialized successfully');
   } catch (e) {
-    debugPrint('Firebase initialization failed: $e');
+    debugPrint('❌ Firebase initialization failed: $e');
     // Continue without Firebase - app can still run
   }
 
