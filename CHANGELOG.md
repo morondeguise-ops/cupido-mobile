@@ -2,6 +2,12 @@
 
 All notable changes to the Cupido Flutter mobile application will be documented in this file.
 
+## [2.2.0] - 2025-11-11
+
+### Added - UI Screens for New Features
+
+Added comprehensive UI screens for all new models and features introduced in v2.1.0.
+
 ## [2.1.0] - 2025-11-11
 
 ### Added - New Models and Features
@@ -50,6 +56,31 @@ All notable changes to the Cupido Flutter mobile application will be documented 
    - Update privacy settings
    - Get kink compatibility with other users
    - Search and get recommendations
+
+**New Screens:**
+
+1. **Chat Screens** (`lib/features/messages/screens/`):
+   - `conversations_screen.dart` - List all conversations with unread indicators
+   - `chat_detail_screen.dart` - Full-featured chat with message editing, deletion, and attachments
+   - Support for direct, group, and channel conversations
+   - Date separators and message timestamps
+   - Typing indicators and read receipts
+
+2. **Notifications Screen** (`lib/features/notifications/screens/`):
+   - `notifications_screen.dart` - Comprehensive notifications list with tabs
+   - Filter by category (All, Dating, Social, System)
+   - Unread count badge in app bar
+   - Swipe to delete notifications
+   - Priority badges (Low, Normal, High, Urgent)
+   - Mark all as read functionality
+
+3. **Kink Interests Screens** (`lib/features/kinks/screens/`):
+   - `kink_interests_browse_screen.dart` - Browse and search all available kink interests
+   - `user_kinks_screen.dart` - Manage personal kink interests with privacy controls
+   - Category filtering and search
+   - Privacy level management (Public, Matches Only, Private)
+   - Age restriction and verification indicators
+   - Statistics dashboard showing total, verified, and public interests
 
 **Updated Models:**
 
@@ -264,6 +295,7 @@ Mobile app continues using:
 
 ## Version History
 
+- **v2.2.0** (2025-11-11) - UI screens for Chat, Notifications, and Kink Interests
 - **v2.1.0** (2025-11-11) - New models and features: Chat, Enhanced Notifications, Kink Interests
 - **v2.0.0** (2025-11-10) - Backend architecture update, environment configs
 - **v1.0.0** (2025-11-08) - Initial release
