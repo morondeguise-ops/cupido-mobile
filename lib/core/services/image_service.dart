@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_cropper/image_cropper.dart';
+// import 'package:image_cropper/image_cropper.dart';  // Disabled for web compatibility
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
@@ -141,12 +142,20 @@ class ImageService {
   }
 
   /// Crop an image
+  /// NOTE: Image cropping is disabled for web compatibility.
+  /// Returns the original file without cropping.
   Future<File?> cropImage(
     File file, {
-    CropAspectRatio? aspectRatio,
-    List<CropAspectRatioPreset>? aspectRatioPresets,
+    dynamic aspectRatio,  // Changed from CropAspectRatio? to dynamic
+    List<dynamic>? aspectRatioPresets,  // Changed from List<CropAspectRatioPreset>?
   }) async {
     try {
+      // Image cropping is currently disabled for web compatibility
+      // TODO: Re-enable when image_cropper supports web or find alternative
+      debugPrint('Image cropping is disabled - returning original image');
+      return file;
+
+      /* Original implementation - disabled for web compatibility
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: file.path,
         aspectRatio: aspectRatio,
@@ -173,6 +182,7 @@ class ImageService {
       );
 
       return croppedFile != null ? File(croppedFile.path) : null;
+      */
     } catch (e) {
       debugPrint('Error cropping image: $e');
       return null;

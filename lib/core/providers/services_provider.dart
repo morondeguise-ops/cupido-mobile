@@ -11,6 +11,18 @@ import '../services/websocket_service.dart';
 import '../services/subscription_service.dart';
 import '../services/ad_service.dart';
 
+// Export services so they can be used by providers
+export '../services/api_service.dart';
+export '../services/auth_service.dart';
+export '../services/profile_service.dart';
+export '../services/discover_service.dart';
+export '../services/match_service.dart';
+export '../services/post_service.dart';
+export '../services/story_service.dart';
+export '../services/websocket_service.dart';
+export '../services/subscription_service.dart';
+export '../services/ad_service.dart';
+
 // API Service Provider
 final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
 

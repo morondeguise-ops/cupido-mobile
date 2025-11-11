@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,14 +14,31 @@ import 'core/providers/auth_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase
-  await Firebase.initializeApp();
+  // Initialize Firebase (skip on web if not configured)
+  try {
+    if (kIsWeb) {
+      // For web, Firebase needs explicit configuration
+      // Skip initialization if not configured
+      debugPrint('Firebase initialization skipped on web - please configure firebase options');
+    } else {
+      await Firebase.initializeApp();
+    }
+  } catch (e) {
+    debugPrint('Firebase initialization failed: $e');
+    // Continue without Firebase - app can still run
+  }
 
   // Initialize Hive for local storage
   await Hive.initFlutter();
 
-  // Initialize notifications
-  await NotificationService.initialize();
+  // Initialize notifications (skip on web as it requires Firebase)
+  try {
+    if (!kIsWeb) {
+      await NotificationService.initialize();
+    }
+  } catch (e) {
+    debugPrint('Notification service initialization failed: $e');
+  }
 
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([

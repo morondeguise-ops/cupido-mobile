@@ -97,7 +97,7 @@ class AppRouter {
       case feed:
         return MaterialPageRoute(builder: (_) => const FeedScreen());
 
-      case settings:
+      case AppRouter.settings:
         return MaterialPageRoute(builder: (_) => const SettingsScreen());
 
       default:

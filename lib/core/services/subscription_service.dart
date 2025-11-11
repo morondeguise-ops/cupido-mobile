@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class SubscriptionService {
@@ -65,7 +66,7 @@ class SubscriptionService {
       debugPrint('Purchase successful: ${package.identifier}');
       return PurchaseResult(
         success: true,
-        customerInfo: purchaserInfo.customerInfo,
+        customerInfo: purchaserInfo,
         error: null,
       );
     } on PlatformException catch (e) {
@@ -178,7 +179,7 @@ class SubscriptionService {
         productIdentifier: activeEntitlement.productIdentifier,
         isActive: activeEntitlement.isActive,
         willRenew: activeEntitlement.willRenew,
-        periodType: activeEntitlement.periodType,
+        periodType: activeEntitlement.periodType.toString(),
         expirationDate: activeEntitlement.expirationDate,
         originalPurchaseDate: activeEntitlement.originalPurchaseDate,
       );
@@ -189,8 +190,10 @@ class SubscriptionService {
   }
 
   /// Listen to customer info updates
+  /// Note: This is a placeholder as the customerInfoStream is not available in this version
   Stream<CustomerInfo> get customerInfoStream {
-    return Purchases.customerInfoStream;
+    // Return an empty stream as customerInfoStream is not available in this version of purchases_flutter
+    return Stream.empty();
   }
 
   /// Set custom attributes for the user

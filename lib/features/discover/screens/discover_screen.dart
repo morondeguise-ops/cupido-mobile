@@ -17,11 +17,11 @@ class DiscoverScreen extends ConsumerStatefulWidget {
 class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   final CardSwiperController _cardController = CardSwiperController();
 
-  void _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction) async {
-    if (currentIndex == null) return;
+  Future<bool> _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction) async {
+    if (currentIndex == null) return false;
 
     final state = ref.read(discoverProvider);
-    if (previousIndex >= state.candidates.length) return;
+    if (previousIndex >= state.candidates.length) return false;
 
     final candidate = state.candidates[previousIndex];
     final action = direction == CardSwiperDirection.right ? 'like' : 'pass';
@@ -36,6 +36,8 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     if (swipeAction != null && swipeAction.isMatch && mounted) {
       _showMatchDialog(swipeAction);
     }
+
+    return true;
   }
 
   void _showMatchDialog(swipeAction) {
