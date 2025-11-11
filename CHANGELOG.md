@@ -2,6 +2,119 @@
 
 All notable changes to the Cupido Flutter mobile application will be documented in this file.
 
+## [2.1.0] - 2025-11-11
+
+### Added - New Models and Features
+
+**New Models:**
+
+1. **Chat System** (`lib/core/models/chat_model.dart`):
+   - `ChatConversation` - Support for direct, group, and channel conversations
+   - `ChatMessage` - Rich messaging with attachments, editing, and deletion support
+   - Message types: text, image, video, audio, file, system
+
+2. **Enhanced Notifications** (`lib/core/models/notification_model.dart`):
+   - `UserNotification` - Comprehensive notification system
+   - Support for multiple notification types: match, message, like, super_like, boost, profile_view, etc.
+   - Priority levels: low, normal, high, urgent
+   - Categories: dating, social, subscription, gamification, system, security
+   - Channel preferences and metadata support
+
+3. **Kink Interests** (`lib/core/models/kink_model.dart`):
+   - `KinkInterest` - Browse and discover kink interests
+   - `UserKinkInterest` - Manage personal kink preferences with privacy controls
+   - Privacy levels: public, matches_only, private
+   - Age restriction and verification support
+   - Categories: romantic, physical, roleplay, lifestyle, fetish, bdsm, other
+
+**New Services:**
+
+1. **ChatService** (`lib/core/services/chat_service.dart`):
+   - Create and manage conversations
+   - Send, edit, and delete messages
+   - Mark messages as read
+   - Search messages
+   - Upload attachments
+   - Typing indicators
+
+2. **UserNotificationService** (`lib/core/services/user_notification_service.dart`):
+   - Fetch notifications with filtering
+   - Mark as read/unread
+   - Manage notification preferences
+   - Get unread counts
+   - Clear expired notifications
+
+3. **KinkService** (`lib/core/services/kink_service.dart`):
+   - Browse kink interests by category
+   - Add/remove kink interests to profile
+   - Update privacy settings
+   - Get kink compatibility with other users
+   - Search and get recommendations
+
+**Updated Models:**
+
+1. **User Model** (`lib/core/models/user_model.dart`):
+   - Added `isFake` field to support fake user profiles for testing/demo
+   - Fake users are marked in backend but appear normal to regular users
+   - Only admins can see the fake user indicator
+
+**Backend Compatibility:**
+
+- Compatible with cupido-core v2.0.0+
+- Compatible with cupido-admin v2.0.0+ (with new Filament resources)
+- New migrations added to backend: 68 tables including chat, notifications, kink interests
+- FakeUsersSeeder available in backend for generating test data
+
+**Example Data:**
+
+Backend now includes:
+- `FakeUsersSeeder` - Generate realistic fake users with profiles and hobbies
+- `GamificationSeeder` - Seed gamification data
+- `AdminUserSeeder` - Create admin users
+- `SettingsSeeder` - Initialize app settings
+
+### Technical Details
+
+**New API Endpoints (Expected):**
+
+```
+Chat:
+GET    /chat/conversations
+POST   /chat/conversations
+GET    /chat/conversations/{id}
+GET    /chat/conversations/{id}/messages
+POST   /chat/conversations/{id}/messages
+PUT    /chat/conversations/{id}/messages/{messageId}
+DELETE /chat/conversations/{id}/messages/{messageId}
+
+Notifications:
+GET    /notifications
+GET    /notifications/{id}
+POST   /notifications/{id}/read
+POST   /notifications/mark-all-read
+DELETE /notifications/{id}
+GET    /notifications/unread-count
+
+Kinks:
+GET    /kinks
+GET    /kinks/{id}
+GET    /kinks/categories
+GET    /profile/kinks
+POST   /profile/kinks
+PUT    /profile/kinks/{id}
+DELETE /profile/kinks/{id}
+GET    /users/{id}/kink-compatibility
+```
+
+**Model Mapping to Backend:**
+
+- Flutter `ChatConversation` ↔ Laravel `Cupido\Core\Models\Chat\ChatConversation`
+- Flutter `ChatMessage` ↔ Laravel `Cupido\Core\Models\Chat\ChatMessage`
+- Flutter `UserNotification` ↔ Laravel `Cupido\Core\Models\Notifications\UserNotification`
+- Flutter `KinkInterest` ↔ Laravel `Cupido\Core\Models\Kink\KinkInterest`
+
+---
+
 ## [2.0.0] - 2025-11-10
 
 ### Changed - Backend Architecture Update
@@ -151,5 +264,6 @@ Mobile app continues using:
 
 ## Version History
 
+- **v2.1.0** (2025-11-11) - New models and features: Chat, Enhanced Notifications, Kink Interests
 - **v2.0.0** (2025-11-10) - Backend architecture update, environment configs
 - **v1.0.0** (2025-11-08) - Initial release

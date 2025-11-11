@@ -12,6 +12,7 @@ class User {
   final int? sponsorId;
   final bool isVerified;
   final bool isPremium;
+  final bool isFake;
   final int trustScore;
   final int profileCompletionPercentage;
   final DateTime? lastSeenAt;
@@ -34,6 +35,7 @@ class User {
     this.sponsorId,
     required this.isVerified,
     required this.isPremium,
+    required this.isFake,
     required this.trustScore,
     required this.profileCompletionPercentage,
     this.lastSeenAt,
@@ -60,6 +62,7 @@ class User {
       sponsorId: json['sponsor_id'],
       isVerified: json['is_verified'] ?? false,
       isPremium: json['is_premium'] ?? false,
+      isFake: json['is_fake'] ?? false,
       trustScore: json['trust_score'] ?? 0,
       profileCompletionPercentage: json['profile_completion_percentage'] ?? 0,
       lastSeenAt: json['last_seen_at'] != null
@@ -97,6 +100,7 @@ class User {
       'sponsor_id': sponsorId,
       'is_verified': isVerified,
       'is_premium': isPremium,
+      'is_fake': isFake,
       'trust_score': trustScore,
       'profile_completion_percentage': profileCompletionPercentage,
       'last_seen_at': lastSeenAt?.toIso8601String(),

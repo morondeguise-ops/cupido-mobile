@@ -1,7 +1,7 @@
 name: cupido
 description: Cupido - Exclusive hobby-based social discovery platform
 publish_to: 'none'
-version: 1.0.0+1
+version: 2.1.0+3
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
