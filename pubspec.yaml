@@ -65,7 +65,7 @@ dependencies:
   app_links: ^4.0.1
 
   # In-App Purchases
-  purchases_flutter: ^6.20.0
+  purchases_flutter: ^7.0.0
 
   # Ads
   google_mobile_ads: ^5.1.0
